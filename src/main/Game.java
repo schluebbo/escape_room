@@ -1,10 +1,10 @@
 package main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class Game {
 
@@ -67,41 +67,36 @@ public class Game {
     private void handleCommand(String command) {
 
         if (command.equals("hilfe")) {
-            System.out.println("Befehle: hilfe, schau, gehe n|s|o|w, ende");
-        }
-        else if (command.equals("schau")) {
+            System.out.println("Befehle: hilfe, schau, gehe n|s|o|w|h|r, ende");
+        } else if (command.equals("schau")) {
             System.out.println(player.getCurrentRoom().getDescription());
-        }
-        else if (command.startsWith("gehe ")) {
+        } else if (command.startsWith("gehe ")) {
 
             String direction = command.substring(5);
             Room nextRoom = player.getCurrentRoom().getExit(direction);
 
             if (nextRoom == null) {
                 System.out.println("Dort ist kein Ausgang.");
-            }
-            else {
+            } else {
                 player.setCurrentRoom(nextRoom);
                 System.out.println(player.getCurrentRoom().getDescription());
             }
-        }
-        else if (command.equals("ende")) {
+        } else if (command.equals("ende")) {
             running = false;
-        }
-        else {
+        } else {
             System.out.println("Unbekannter Befehl. Tippe 'hilfe'.");
         }
     }
 
     /**
      * Baut die eigentliche Spielwelt auf.
-     *
+     * <p>
      * Idee:
      * 1. CSV-Datei komplett einlesen
      * 2. Räume anlegen
      * 3. Ausgänge anlegen
      * 4. Start-Raum setzen
-     *
+     * <p>
      * Falls das Einlesen der Datei fehlschlägt, bleibt die Minimalwelt erhalten.
      */
     private void setupWorld() {
@@ -132,8 +127,7 @@ public class Game {
         if (startRoom != null) {
             rooms = loadedRooms;
             player.setCurrentRoom(startRoom);
-        }
-        else {
+        } else {
             System.out.println("Kein gültiger Start-Raum gefunden.");
             System.out.println("Die vorläufige Welt bleibt erhalten.");
         }
@@ -160,8 +154,7 @@ public class Game {
             }
 
             scanner.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Datei nicht gefunden: " + fileName);
         }
 
@@ -187,7 +180,7 @@ public class Game {
 
     /**
      * Geht alle Zeilen durch und setzt für jede EXIT-Zeile einen Ausgang.
-     *
+     * <p>
      * Wichtige Vereinfachung:
      * Diese Methode setzt voraus, dass die Räume vorher bereits angelegt wurden.
      */
