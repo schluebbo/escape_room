@@ -13,6 +13,8 @@ public class Room {
     private Room south;
     private Room east;
     private Room west;
+    private Room up;
+    private Room down;
 
     /**
      * Konstruktor:
@@ -41,11 +43,13 @@ public class Room {
      * Setzt alle Ausgänge auf einmal.
      * Diese Methode kann später nützlich sein.
      */
-    public void setExits(Room north, Room south, Room east, Room west) {
+    public void setExits(Room north, Room south, Room east, Room west, Room up, Room down) {
         this.north = north;
         this.south = south;
         this.east = east;
         this.west = west;
+        this.up = up;
+        this.down = down;
     }
 
     /**
@@ -68,6 +72,14 @@ public class Room {
         if (direction.equals("w")) {
             west = room;
         }
+
+        if (direction.equals("h")) {
+            up = room;
+        }
+
+        if (direction.equals("r")) {
+            down = room;
+        }
     }
 
     /**
@@ -80,6 +92,8 @@ public class Room {
         if (direction.equals("s")) return south;
         if (direction.equals("o")) return east;
         if (direction.equals("w")) return west;
+        if (direction.equals("h")) return up;
+        if (direction.equals("r")) return down;
 
         return null;
     }

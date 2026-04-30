@@ -17,6 +17,8 @@ EXIT;Flur;w;Lager
 EXIT;Labor;s;Flur
 EXIT;Büro;w;Flur
 EXIT;Lager;o;Flur
+EXIT;Labor;r;Keller
+EXIT;Keller;h;Labor
 EXIT;Keller;o;Werkstatt
 EXIT;Werkstatt;w;Keller
 EXIT;Werkstatt;o;Serverraum
