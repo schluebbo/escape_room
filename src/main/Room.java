@@ -9,6 +9,9 @@ public class Room {
     // Beschreibung des Raums
     private String description;
 
+    // Informationen des Raums
+    private String information;
+
     // Nachbarräume in die vier Himmelsrichtungen
     private Room north;
     private Room south;
@@ -21,9 +24,10 @@ public class Room {
      * Konstruktor:
      * Ein Raum besitzt einen Namen und eine Beschreibung.
      */
-    public Room(String name, String description) {
+    public Room(String name, String description, String information) {
         this.name = name;
         this.description = description;
+        this.information = information;
     }
 
     /**
@@ -38,6 +42,13 @@ public class Room {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     *  Gibt die Informationen des Raums zurück
+     */
+    public String getInformation() {
+        return information;
     }
 
     /**

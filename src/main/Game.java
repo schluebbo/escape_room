@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
@@ -26,7 +27,7 @@ public class Game {
         rooms = new ArrayList<>();
 
         // Vorläufige Minimalwelt
-        rooms.add(new Room("Startraum", "Du bist in einem vorläufigen Startraum."));
+        rooms.add(new Room("Startraum", "Du bist in einem vorläufigen Startraum.", "Dies sind die Infos zum vorläufigem Startraum."));
 
         // Der Player wird sicher auf den ersten vorhandenen Raum gesetzt
         player = new Player(rooms.get(0));
@@ -51,6 +52,7 @@ public class Game {
         System.out.println("Willkommen bei EscapeCampus!");
         System.out.println("Tippe 'hilfe' für Befehle.");
         System.out.println(player.getCurrentRoom().getDescription());
+        System.out.println(player.getCurrentRoom().getInformation());
 
         while (running) {
             System.out.print("> ");
@@ -70,6 +72,8 @@ public class Game {
             System.out.println("Befehle: hilfe, schau, gehe n|s|o|w|h|r, ende");
         } else if (command.equals("schau")) {
             System.out.println(player.getCurrentRoom().getDescription());
+        } else if (command.equals("info")) {
+            System.out.println(player.getCurrentRoom().getInformation());
         } else if (command.startsWith("gehe ")) {
 
             String direction = command.substring(5);
@@ -81,6 +85,7 @@ public class Game {
                 player.setCurrentRoom(nextRoom);
                 nextRoom.setVisited(true);
                 System.out.println(player.getCurrentRoom().getDescription());
+                System.out.println(player.getCurrentRoom().getInformation());
             }
         } else if (command.equals("ende")) {
             running = false;
@@ -174,8 +179,9 @@ public class Game {
             if (parts[0].trim().equals("ROOM")) {
                 String name = parts[1].trim();
                 String description = parts[2].trim();
+                String information = parts[3].trim();
 
-                loadedRooms.add(new Room(name, description));
+                loadedRooms.add(new Room(name, description, information));
             }
         }
     }
