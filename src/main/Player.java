@@ -25,6 +25,6 @@ public class Player {
      */
     public void setCurrentRoom(Room room) {
         currentRoom = room;
-        currentRoom.markChecked();
+        currentRoom.markVisited();
     }
 }

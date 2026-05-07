@@ -9,7 +9,7 @@ public class Room {
     private final String description;
 
     // Ob der Raum bereits besucht wurde
-    private boolean isChecked;
+    private boolean isVisited;
 
     // Nachbarräume in die vier Himmelsrichtungen
     private Room north;
@@ -26,7 +26,7 @@ public class Room {
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
-        this.isChecked = false;
+        this.isVisited = false;
     }
 
     /**
@@ -105,14 +105,14 @@ public class Room {
     /**
      * Gibt zurück, ob der Raum bereits besucht wurde.
      */
-    public boolean isChecked() {
-        return isChecked;
+    public boolean getIsVisited() {
+        return isVisited;
     }
 
     /**
      * Markiert den Raum als besucht.
      */
-    public void markChecked() {
-        isChecked = true;
+    public void markVisited() {
+        isVisited = true;
     }
 }
