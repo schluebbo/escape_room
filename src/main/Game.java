@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Game {
 
     // Der eine Spieler des Spiels
-    private Player player;
+    private final Player player;
 
     // Steuert, ob die Spielschleife weiterläuft
     private boolean running;
@@ -148,7 +148,7 @@ public class Game {
                 String line = scanner.nextLine().trim();
 
                 // Leere Zeilen werden übersprungen
-                if (!line.equals("")) {
+                if (!line.isEmpty()) {
                     lines.add(line);
                 }
             }

@@ -3,10 +3,10 @@ package main;
 public class Room {
 
     // Name des Raums
-    private String name;
+    private final String name;
 
     // Beschreibung des Raums
-    private String description;
+    private final String description;
 
     // Ob der Raum bereits besucht wurde
     private boolean isChecked;
@@ -91,15 +91,15 @@ public class Room {
      * Falls es dort keinen Ausgang gibt, wird null zurückgegeben.
      */
     public Room getExit(String direction) {
-
-        if (direction.equals("n")) return north;
-        if (direction.equals("s")) return south;
-        if (direction.equals("o")) return east;
-        if (direction.equals("w")) return west;
-        if (direction.equals("h")) return up;
-        if (direction.equals("r")) return down;
-
-        return null;
+        return switch (direction) {
+            case "n" -> north;
+            case "s" -> south;
+            case "o" -> east;
+            case "w" -> west;
+            case "h" -> up;
+            case "r" -> down;
+            default -> null;
+        };
     }
 
     /**
