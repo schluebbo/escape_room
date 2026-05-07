@@ -4,6 +4,7 @@ public class Room {
 
     // Name des Raums
     private String name;
+    private boolean isVisited;
 
     // Beschreibung des Raums
     private String description;
@@ -80,6 +81,14 @@ public class Room {
         if (direction.equals("r")) {
             down = room;
         }
+    }
+
+    public void setVisited(boolean isVisited) {
+        this.isVisited = isVisited;
+    }
+
+    public boolean getVisited() {
+        return isVisited;
     }
 
     /**
