@@ -10,7 +10,7 @@ public class Player {
      * Der Player startet in einem übergebenen Raum.
      */
     public Player(Room startRoom) {
-        currentRoom = startRoom;
+        setCurrentRoom(startRoom);
     }
 
     /**
@@ -25,5 +25,6 @@ public class Player {
      */
     public void setCurrentRoom(Room room) {
         currentRoom = room;
+        currentRoom.markChecked();
     }
 }
