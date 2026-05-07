@@ -1,15 +1,17 @@
-ROOM;Foyer;Du bist im Foyer.
-ROOM;Flur;Ein langer Flur.
-ROOM;Labor;Ein chemisches Labor.
-ROOM;Lager;Ein Raum voller Kisten.
-ROOM;Büro;Ein kleines Büro.
-ROOM;Keller;Ein dunkler Keller.
-ROOM;Werkstatt;Hier liegen Werkzeuge.
-ROOM;Serverraum;Überall blinken Lichter.
+ROOM;Foyer;Eine stille Eingangshalle, nur von der schwachen Notbeleuchtung erhellt. Der Ausgang bleibt verriegelt, und das Summen des Kontrollpanels erfüllt den Raum.;Das Foyer liegt düster vor euch. Die Notbeleuchtung wirft zitternde Schatten, und die automatische Tür zum Ausgang ist fest verriegelt. Eine blecherne Stimme dröhnt aus den Lautsprechern: „Biogefahr-Quarantäne aktiviert. Alle Ausgänge verriegelt.“
+ROOM;Flur;Ein langer, kühler Gang. Die Notlichter werfen flache Schatten an die Wände. Türen führen zu verschiedenen Bereichen des Campus.;Im Flur riecht es nach verbrannter Elektronik. Ein Sicherungskasten hängt offen, als hätte jemand in Eile darin gearbeitet. Auf dem Boden liegt eine einzelne Sicherung – herausgerissen oder fallen gelassen?
+ROOM;Labor;Das Labor riecht nach Chemikalien und Metall. Instrumente und Reagenzien stehen bereit, als hätte jemand das Experiment nur kurz unterbrochen.;Das Labor riecht nach Chemikalien und erhitztem Metall. Reagenzgläser stehen ungeordnet herum, manche zeigen seltsame Farbveränderungen. Auf einem Labortisch liegt ein Protokoll von Dr. Karr über eine Reihe von pH-basierten Stabilitätstests, die offenbar mit dem frühen Helix-Prototyp zusammenhängen. Ein Bunsenbrenner ist noch warm. Der letzte Benutzer ist nicht weit gekommen.
+ROOM;Lager;Kisten, Regale und verstreute Akten füllen den Raum. Staub liegt in der Luft, und nur gelegentlich blinkt eine alte Kontrolllampe.;Das Lager wirkt eher wie ein chaotisches Archiv: Kisten voller Akten, alte Geräte, verstaubte Regale. Die Tür war nicht verschlossen, was für Dr. Rottmann ungewöhnlich wäre. Zwischen den Kisten findet ihr einen Mikrofilm-Behälter, als hätte ihn jemand bewusst sichtbar platziert. Auf einem Regal erkennt man Symbole, die scheinbar ein eigenes Sortiersystem bilden. Nichts liegt zufällig hier – zumindest nicht im Lager dieser Universität.
+ROOM;Büro;Ein kleines, unordentliches Büro. Unterlagen liegen auf dem Tisch, und der Stuhl steht halb zurückgeschoben, als hätte der letzte Nutzer ihn hastig verlassen.;Das Büro eines Professors – vermutlich von Dr. Karr oder Reber – steht halb offen. Der Raum ist unordentlich, aber nicht verwüstet: jemand hat hastig nach etwas gesucht. Auf dem Schreibtisch liegt ein halb zerknitterter Ausdruck einer persönlichen Nachricht von Liora Velberg. Einige Passagen sind geschwärzt, andere mit Markierungen versehen. Eine Schublade ist verschlossen, daneben liegt ein Schlüsselbund mit einem fehlenden Schlüssel.
+ROOM;Keller;Ein kühler, leicht modriger Raum voller alter Geräte und Kartons. Das Licht ist schwach, und jeder Schritt hallt leise wider.;Der Keller ist kühl, feucht und schlecht beleuchtet. Hier wurden anscheinend Geräte gelagert, die schon lange niemand mehr benutzt hat. Ein alter Schreibtisch steht in der Ecke. Darauf liegt ein zerknüllter, verschlüsselter Briefentwurf des Dekans – seine letzten, geheimen Worte. Daneben steht ein eingerahmtes Foto seiner Familie, unbeschadet zwischen Staub und alten Kisten. Die Luft wirkt schwer, als läge die Wahrheit direkt unter der Oberfläche dieser Worte verborgen.
+ROOM;Werkstatt;Eine Werkbank mit verstreuten Werkzeugen dominiert den Raum. Einige Geräte laufen noch im Standby, andere wirken seit längerem ungenutzt.;Die Werkstatt ist eine Mischung aus Technikraum und improvisiertem Forschungsbereich. Werkzeuge hängen ordentlich an der Wand, doch einige fehlen – offenbar in Eile entwendet. Auf der Werkbank liegen Reste eines geöffneten Datengehäuses und mehrere Notizzettel mit Basenpaaren und Zahlen. Es sieht so aus, als hätte jemand versucht, biologische Daten in einem technischen Format zu verstecken. Die DNA-Sequenz wirkt fast wie ein Schlüssel.
+ROOM;Serverraum;Ein kalter, summender Raum voller blinkender Serverracks. Kabel verlaufen geordnet entlang der Wände, und leise Lüftergeräusche erfüllen die Luft.;Der Serverraum ist kalt, nur das Summen der Geräte durchdringt die Stille. Einige Server blinken unruhig, andere sind komplett offline. Ein Monitor zeigt fragmentierte Sicherheitslogs. Es sieht aus, als hätte jemand die digitalen Spuren seines Eindringens manipuliert. Neben dem Serverschrank liegt eine defekte Magnetkarte – als hätte jemand versucht, einen Zugang neu zu codieren, wurde aber unterbrochen. Zwischen den Kabeln hängt ein kleiner Zettel mit kryptischen Zahlenreihen.
+ROOM;Ausgang;Du bist draußen.;Als sich das Tor mit einem schweren metallischen Knacken öffnet, fällt zum ersten Mal seit Stunden frische Luft über euch. Der Mond steht über dem Campus, still und unbeteiligt, als hätte er all das Chaos im Inneren nie gesehen. Der Alarm verstummt. Die Lichter gehen aus. Hinter euch schließt sich das Tor ein letztes Mal – diesmal dauerhaft. Ihr habt überlebt. Ihr habt die Wahrheit entdeckt. Und ihr habt verhindert, dass Projekt Helix in die falschen Hände fällt. Doch während ihr den Weg vom Campus hinuntergeht, begleitet euch ein Gedanke: Irgendwo da draußen weiß Agent Orion, dass er gescheitert ist. Und Menschen wie er geben selten auf. Für heute jedoch seid ihr frei. Ihr habt es geschafft.
 
 STARTROOM;Foyer
 
 EXIT;Foyer;n;Flur
+EXIT;Foyer;w;Ausgang
 EXIT;Flur;s;Foyer
 EXIT;Flur;n;Labor
 EXIT;Flur;o;Büro
@@ -23,3 +25,5 @@ EXIT;Keller;o;Werkstatt
 EXIT;Werkstatt;w;Keller
 EXIT;Werkstatt;o;Serverraum
 EXIT;Serverraum;w;Werkstatt
+
+OPENDOOR;Ihr kehrt ins Foyer zurück. Die Türen sind noch verriegelt, doch das Kontrollpanel scheint nun ansprechbar zu sein. Ein schwaches Summen zeigt, dass die Sicherheitsprotokolle reduziert wurden – ihr habt die entscheidenden Schritte getan. Doch irgendwo im Gebäude hört ihr Schritte. Vielleicht ist Agent Orion noch immer da. Das Tor wird sich nur einmal öffnen, bevor das System einen Neustart durchführt.
