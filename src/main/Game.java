@@ -79,6 +79,7 @@ public class Game {
                 System.out.println("Dort ist kein Ausgang.");
             } else {
                 player.setCurrentRoom(nextRoom);
+                nextRoom.setVisited(true);
                 System.out.println(player.getCurrentRoom().getDescription());
             }
         } else if (command.equals("ende")) {
@@ -127,6 +128,7 @@ public class Game {
         if (startRoom != null) {
             rooms = loadedRooms;
             player.setCurrentRoom(startRoom);
+            startRoom.setVisited(true);
         } else {
             System.out.println("Kein gültiger Start-Raum gefunden.");
             System.out.println("Die vorläufige Welt bleibt erhalten.");
