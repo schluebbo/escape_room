@@ -79,8 +79,11 @@ public class Game {
                 System.out.println("Dort ist kein Ausgang.");
             } else {
                 player.setCurrentRoom(nextRoom);
-                nextRoom.setVisited(true);
                 System.out.println(player.getCurrentRoom().getDescription());
+                if (!nextRoom.getVisited() && nextRoom.getEvent() != null) {
+                    handleCommand(nextRoom.getEvent().getCommand());
+                }
+                nextRoom.setVisited(true);
             }
         } else if (command.equals("ende")) {
             running = false;

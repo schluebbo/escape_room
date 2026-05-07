@@ -5,6 +5,7 @@ public class Room {
     // Name des Raums
     private String name;
     private boolean isVisited;
+    private Event event;
 
     // Beschreibung des Raums
     private String description;
@@ -24,6 +25,12 @@ public class Room {
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Room(String name, String description, Event event) {
+        this.name = name;
+        this.description = description;
+        this.event = event;
     }
 
     /**
@@ -89,6 +96,14 @@ public class Room {
 
     public boolean getVisited() {
         return isVisited;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     /**
