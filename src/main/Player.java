@@ -5,6 +5,9 @@ public class Player {
     // Der Raum, in dem sich der Spieler aktuell befindet
     private Room currentRoom;
 
+    // Der Schlüssel für den letzten Raum
+    private boolean key;
+
     /**
      * Konstruktor:
      * Der Player startet in einem übergebenen Raum.
@@ -25,5 +28,13 @@ public class Player {
      */
     public void setCurrentRoom(Room room) {
         currentRoom = room;
+    }
+
+    public boolean hasKey() {
+        return key;
+    }
+
+    public void setKey(boolean hasKey) {
+        key = hasKey;
     }
 }
