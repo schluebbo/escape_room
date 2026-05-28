@@ -24,9 +24,14 @@ public class Commands {
                 System.out.println("Dort ist kein Ausgang.");
             } else {
                 player.setCurrentRoom(nextRoom);
-                nextRoom.setVisited(true);
-                System.out.println(player.getCurrentRoom().getDescription());
-                System.out.println(player.getCurrentRoom().getInformation());
+                if (nextRoom.getVisited()){
+                    System.out.println(player.getCurrentRoom().getName());
+                } else {
+                    System.out.println(player.getCurrentRoom().getDescription());
+                    System.out.println(player.getCurrentRoom().getInformation());
+                    nextRoom.setVisited(true);
+                }
+
             }
         } else if (command.equals("ende")) {
             return false;
