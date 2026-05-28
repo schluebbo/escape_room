@@ -152,8 +152,8 @@ public class Game {
 
       if (parts[0].trim().equals("ROOM")) {
         String name = parts[1].trim();
-        String description = parts[2].trim();
-        String information = parts[3].trim();
+        String description = parts[2].replace(". ", ".\n");
+        String information = parts[3].replace(". ", ".\n").replace(" '", "\n'");
 
         loadedRooms.add(new Room(name, description, information));
       }
