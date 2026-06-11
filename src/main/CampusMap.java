@@ -22,33 +22,42 @@ public class CampusMap {
 
     Room current = game.getPlayer().getCurrentRoom();
     Map<Room, int[]> positions = layout(rooms);
+    int cellWidth = labelWidth(rooms);
 
+    int minX = Integer.MAX_VALUE;
+    int maxX = Integer.MIN_VALUE;
     int minY = Integer.MAX_VALUE;
     int maxY = Integer.MIN_VALUE;
-    for (int[] pos : positions.values()) {
-      minY = Math.min(minY, pos[1]);
-      maxY = Math.max(maxY, pos[1]);
+
+    Map<String, Room> roomAt = new HashMap<>();
+    for (Map.Entry<Room, int[]> entry : positions.entrySet()) {
+      int x = entry.getValue()[0];
+      int y = entry.getValue()[1];
+      minX = Math.min(minX, x);
+      maxX = Math.max(maxX, x);
+      minY = Math.min(minY, y);
+      maxY = Math.max(maxY, y);
+      roomAt.put(x + "," + y, entry.getKey());
     }
 
     for (int y = minY; y <= maxY; y++) {
-      ArrayList<Room> row = new ArrayList<>();
-      for (Map.Entry<Room, int[]> entry : positions.entrySet()) {
-        if (entry.getValue()[1] == y) {
-          row.add(entry.getKey());
-        }
+      if (!rowHasRoom(y, minX, maxX, roomAt)) {
+        continue;
       }
-      row.sort((a, b) -> positions.get(a)[0] - positions.get(b)[0]);
-      if (!row.isEmpty()) {
-        System.out.println(renderRow(row, current));
-      }
-    }
 
-    for (Room room : rooms) {
-      Room lower = room.getExit("r");
-      if (lower != null) {
-        System.out.println();
-        System.out.println(formatLabel(room, current) + " ↓ " + formatLabel(lower, current));
-        break;
+      String dropLine = renderDropBeforeRow(y, positions, minX, maxX, cellWidth);
+      if (!dropLine.isEmpty()) {
+        System.out.println(dropLine);
+      }
+
+      System.out.println(renderLabelRow(y, minX, maxX, roomAt, current, cellWidth));
+
+      int nextRow = nextRoomRow(y, minX, maxX, roomAt);
+      if (nextRow != -1) {
+        String southLine = renderSouthLine(y, nextRow, minX, maxX, roomAt, cellWidth);
+        if (!southLine.isEmpty()) {
+          System.out.println(southLine);
+        }
       }
     }
 
@@ -137,19 +146,135 @@ public class CampusMap {
     return new int[] {x, y};
   }
 
-  private static String renderRow(ArrayList<Room> row, Room current) {
+  private static String renderLabelRow(
+    int y,
+    int minX,
+    int maxX,
+    Map<String, Room> roomAt,
+    Room current,
+    int cellWidth
+  ) {
     StringBuilder line = new StringBuilder();
-    Room previous = null;
 
-    for (Room room : row) {
-      if (previous != null) {
-        line.append(connected(previous, room) ? " - " : "   ");
+    for (int x = minX; x <= maxX; x++) {
+      Room room = roomAt.get(x + "," + y);
+      line.append(padCenter(room == null ? "" : formatLabel(room, current), cellWidth));
+      if (x < maxX) {
+        Room east = roomAt.get((x + 1) + "," + y);
+        line.append(
+          room != null && east != null && connected(room, east) ? "-" : " "
+        );
       }
-      line.append(formatLabel(room, current));
-      previous = room;
     }
 
-    return line.toString();
+    return line.toString().stripTrailing();
+  }
+
+  private static String renderSouthLine(
+    int y,
+    int nextY,
+    int minX,
+    int maxX,
+    Map<String, Room> roomAt,
+    int cellWidth
+  ) {
+    StringBuilder line = new StringBuilder();
+    boolean hasConnector = false;
+
+    for (int x = minX; x <= maxX; x++) {
+      Room room = roomAt.get(x + "," + y);
+      Room south = roomAt.get(x + "," + nextY);
+      if (room != null && south != null && connected(room, south)) {
+        line.append(padCenter("|", cellWidth));
+        hasConnector = true;
+      } else {
+        line.append(spaces(cellWidth));
+      }
+      if (x < maxX) {
+        line.append(" ");
+      }
+    }
+
+    return hasConnector ? line.toString().stripTrailing() : "";
+  }
+
+  private static String renderDropBeforeRow(
+    int y,
+    Map<Room, int[]> positions,
+    int minX,
+    int maxX,
+    int cellWidth
+  ) {
+    for (Map.Entry<Room, int[]> entry : positions.entrySet()) {
+      if (entry.getValue()[1] != y) {
+        continue;
+      }
+
+      Room upper = entry.getKey().getExit("h");
+      if (upper == null) {
+        continue;
+      }
+
+      int x = positions.get(upper)[0];
+      StringBuilder line = new StringBuilder();
+      for (int col = minX; col <= maxX; col++) {
+        if (col == x) {
+          line.append(padCenter("↓", cellWidth));
+        } else {
+          line.append(spaces(cellWidth));
+        }
+        if (col < maxX) {
+          line.append(" ");
+        }
+      }
+      return line.toString().stripTrailing();
+    }
+
+    return "";
+  }
+
+  private static boolean rowHasRoom(
+    int y,
+    int minX,
+    int maxX,
+    Map<String, Room> roomAt
+  ) {
+    for (int x = minX; x <= maxX; x++) {
+      if (roomAt.get(x + "," + y) != null) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static int nextRoomRow(
+    int y,
+    int minX,
+    int maxX,
+    Map<String, Room> roomAt
+  ) {
+    for (int next = y + 1; next <= maxRowFromMap(roomAt); next++) {
+      if (rowHasRoom(next, minX, maxX, roomAt)) {
+        return next;
+      }
+    }
+    return -1;
+  }
+
+  private static int maxRowFromMap(Map<String, Room> roomAt) {
+    int max = 0;
+    for (String key : roomAt.keySet()) {
+      max = Math.max(max, Integer.parseInt(key.split(",")[1]));
+    }
+    return max;
+  }
+
+  private static int labelWidth(ArrayList<Room> rooms) {
+    int width = 3;
+    for (Room room : rooms) {
+      width = Math.max(width, room.getName().length() + 2);
+    }
+    return width;
   }
 
   private static boolean connected(Room first, Room second) {
@@ -173,6 +298,22 @@ public class CampusMap {
       return "[?]";
     }
     return "[" + room.getName() + "]";
+  }
+
+  private static String padCenter(String text, int width) {
+    if (text.length() >= width) {
+      return text;
+    }
+    int left = (width - text.length()) / 2;
+    return spaces(left) + text + spaces(width - text.length() - left);
+  }
+
+  private static String spaces(int count) {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < count; i++) {
+      builder.append(' ');
+    }
+    return builder.toString();
   }
 
   private static int maxRow(Map<Room, int[]> positions) {
