@@ -1,6 +1,11 @@
 package main;
 
 public class Event {
+
+    public Event(final String command) {
+        this.command = command;
+    }
+
     private String command;
 
     public String getCommand() {
