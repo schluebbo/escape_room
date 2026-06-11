@@ -61,11 +61,13 @@ public class World {
         createExitsFromLines(lines, loadedRooms);
 
         Room loadedStartRoom = findStartRoomFromLines(lines, loadedRooms);
+        Room serverRoom = findRoom(loadedRooms, "Serverraum");
 
-        if (loadedStartRoom != null) {
+        if (loadedStartRoom != null && serverRoom != null) {
             rooms = loadedRooms;
             startRoom = loadedStartRoom;
             startRoom.setVisited(true);
+            serverRoom.setEvent(new Event("key_found"));
         } else {
             System.out.println("Kein gültiger Start-Raum gefunden.");
             System.out.println("Die vorläufige Welt bleibt erhalten.");
