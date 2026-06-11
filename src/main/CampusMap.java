@@ -45,11 +45,6 @@ public class CampusMap {
         continue;
       }
 
-      String dropLine = renderDropBeforeRow(y, positions, minX, maxX, cellWidth);
-      if (!dropLine.isEmpty()) {
-        System.out.println(dropLine);
-      }
-
       System.out.println(renderLabelRow(y, minX, maxX, roomAt, current, cellWidth));
 
       int nextRow = nextRoomRow(y, minX, maxX, roomAt);
@@ -58,6 +53,11 @@ public class CampusMap {
         if (!southLine.isEmpty()) {
           System.out.println(southLine);
         }
+      }
+
+      String dropLine = renderDropAfterRow(y, positions, minX, maxX, cellWidth);
+      if (!dropLine.isEmpty()) {
+        System.out.println(dropLine);
       }
     }
 
@@ -198,25 +198,31 @@ public class CampusMap {
     return hasConnector ? line.toString().stripTrailing() : "";
   }
 
-  private static String renderDropBeforeRow(
+  private static String renderDropAfterRow(
     int y,
     Map<Room, int[]> positions,
     int minX,
     int maxX,
     int cellWidth
   ) {
+    StringBuilder line = new StringBuilder();
+    boolean hasDrop = false;
+
     for (Map.Entry<Room, int[]> entry : positions.entrySet()) {
       if (entry.getValue()[1] != y) {
         continue;
       }
 
-      Room upper = entry.getKey().getExit("h");
-      if (upper == null) {
+      Room lower = entry.getKey().getExit("r");
+      if (lower == null || positions.get(lower)[1] <= y + 1) {
         continue;
       }
 
-      int x = positions.get(upper)[0];
-      StringBuilder line = new StringBuilder();
+      int x = entry.getValue()[0];
+      if (hasDrop) {
+        continue;
+      }
+
       for (int col = minX; col <= maxX; col++) {
         if (col == x) {
           line.append(padCenter("↓", cellWidth));
@@ -227,10 +233,10 @@ public class CampusMap {
           line.append(" ");
         }
       }
-      return line.toString().stripTrailing();
+      hasDrop = true;
     }
 
-    return "";
+    return hasDrop ? line.toString().stripTrailing() : "";
   }
 
   private static boolean rowHasRoom(
