@@ -11,7 +11,9 @@ public class Commands {
     Player player = game.getPlayer();
 
     if (command.equals("hilfe")) {
-      System.out.println("Befehle: hilfe, schau, gehe n|s|o|w|h|r, ende");
+      System.out.println("Befehle: hilfe, schau, info, karte, gehe n|s|o|w|h|r, ende");
+    } else if (command.equals("karte")) {
+      CampusMap.print(game);
     } else if (command.equals("schau")) {
       System.out.println(player.getCurrentRoom().getDescription());
     } else if (command.equals("info")) {
