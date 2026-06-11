@@ -58,7 +58,16 @@ public class Commands {
     } else {
       System.out.println(player.getCurrentRoom().getDescription());
       System.out.println(player.getCurrentRoom().getInformation());
+      if (nextRoom.getEvent() != null) {
+        handleEvent(nextRoom.getEvent().getCommand(), player);
+      }
       nextRoom.setVisited(true);
+    }
+  }
+
+  private static void handleEvent(String command, Player player) {
+    if (command.equals("key_found")) {
+      player.setKey(true);
     }
   }
 }
