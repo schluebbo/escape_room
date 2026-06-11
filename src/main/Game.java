@@ -211,7 +211,7 @@ public class Game {
   Gibt die das Ende der Storyline aus, sobald der Player mit dem Key ins Foyer kommt.
   */
 
-  public void getFinalMessage() {
+  public void getLastFoyerMessage() {
     String filePath = Paths.get("src", "campus.csv").toString();
     ArrayList<String> lines = readCsvFile(filePath);
 
@@ -219,8 +219,22 @@ public class Game {
       String[] parts = line.split(";");
 
       if (parts[0].trim().equals("OPENDOOR")) {
-        String finalMessage = parts[1].trim();
-        System.out.println(finalMessage);
+        String finalFoyerMessage = parts[1].trim();
+        System.out.println(finalFoyerMessage);
+      }
+    }
+  }
+
+  public void getEscapedMessage() {
+    String filePath = Paths.get("src", "campus.csv").toString();
+    ArrayList<String> lines = readCsvFile(filePath);
+
+    for (String line : lines) {
+      String[] parts = line.split(";");
+
+      if (parts[0].trim().equals("FINALTEXT")) {
+        String finalExitMessage = parts[1].trim();
+        System.out.println(finalExitMessage);
       }
     }
   }
