@@ -31,9 +31,10 @@ public class Room {
         this.information = information;
     }
 
-    public Room(String name, String description, Event event) {
+    public Room(String name, String description, String information, Event event) {
         this.name = name;
         this.description = description;
+        this.information = information;
         this.event = event;
     }
 
