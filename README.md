@@ -30,49 +30,6 @@ gehe r
 ende
 ```
 
-## Sicherungsrätsel
-
-Im Spiel wurde ein Sicherungsrätsel eingebaut.
-
-Im Flur liegt eine Sicherung auf dem Boden.
-Die Tür zum Labor besitzt ein elektronisches Schloss und funktioniert erst, wenn der Notstrom wiederhergestellt wurde.
-
-Der Spieler muss deshalb:
-
-1. Vom Foyer in den Flur gehen
-2. Die Sicherung aufnehmen
-3. Die Sicherung in den Sicherungskasten einsetzen
-4. Danach kann er das Labor betreten
-
-Beispiel:
-
-```text
-gehe n
-nimm sicherung
-setze sicherung
-gehe n
-```
-
-## Technische Umsetzung
-
-Das Spiel wurde in Java entwickelt.
-
-Für das Sicherungsrätsel wurden unter anderem folgende Dateien erweitert:
-
-* `Player.java`
-* `Commands.java`
-
-In `Player.java` wird gespeichert, ob der Spieler die Sicherung besitzt und ob der Notstrom wiederhergestellt wurde.
-
-In `Commands.java` wurden neue Befehle ergänzt und die Bewegung ins Labor wird blockiert, solange kein Notstrom vorhanden ist.
-
-## Ziel des Features
-
-Das Sicherungsrätsel sorgt dafür, dass der Spieler nicht einfach direkt weitergehen kann.
-Er muss mit der Spielwelt interagieren und ein kleines Rätsel lösen.
-
-Dadurch fühlt sich das Spiel mehr wie ein Escape-Room an.
-
 ## Projekt ausführen
 
 Das Projekt kann in einer Java-Entwicklungsumgebung geöffnet und gestartet werden.
