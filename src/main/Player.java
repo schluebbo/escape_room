@@ -8,6 +8,12 @@ public class Player {
     // Der Schlüssel für den letzten Raum
     private boolean key;
 
+    // Die Sicherung für den Sicherungskasten im Flur
+    private boolean fuse;
+
+    // Gibt an, ob der Notstrom wiederhergestellt wurde
+    private boolean powerRestored;
+
     /**
      * Konstruktor:
      * Der Player startet in einem übergebenen Raum.
@@ -36,5 +42,21 @@ public class Player {
 
     public void setKey(boolean hasKey) {
         key = hasKey;
+    }
+
+    public boolean hasFuse() {
+        return fuse;
+    }
+
+    public void setFuse(boolean hasFuse) {
+        fuse = hasFuse;
+    }
+
+    public boolean hasPowerRestored() {
+        return powerRestored;
+    }
+
+    public void setPowerRestored(boolean hasPowerRestored) {
+        powerRestored = hasPowerRestored;
     }
 }

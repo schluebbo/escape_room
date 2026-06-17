@@ -11,13 +11,21 @@ public class Commands {
     Player player = game.getPlayer();
 
     if (command.equals("hilfe")) {
-      System.out.println("Befehle: hilfe, schau, info, karte, gehe n|s|o|w|h|r, ende");
+      System.out.println(
+        "Befehle: hilfe, schau, info, karte, inventar, nimm sicherung, setze sicherung, gehe n|s|o|w|h|r, ende"
+      );
     } else if (command.equals("karte")) {
       CampusMap.print(game);
     } else if (command.equals("schau")) {
       System.out.println(player.getCurrentRoom().getDescription());
     } else if (command.equals("info")) {
       System.out.println(player.getCurrentRoom().getInformation());
+    } else if (command.equals("inventar")) {
+      printInventory(player);
+    } else if (command.equals("nimm sicherung")) {
+      takeFuse(player);
+    } else if (command.equals("setze sicherung")) {
+      insertFuse(player);
     } else if (command.startsWith("gehe ")) {
       handleMove(command, game, player);
     } else if (command.equals("ende")) {
@@ -35,6 +43,17 @@ public class Commands {
 
     if (nextRoom == null) {
       System.out.println("Dort ist kein Ausgang.");
+      return;
+    }
+
+    if (
+      player.getCurrentRoom().getName().equals("Flur")
+        && nextRoom.getName().equals("Labor")
+        && !player.hasPowerRestored()
+    ) {
+      System.out.println(
+        "Die Labortür reagiert nicht. Ohne Notstrom bleibt das elektronische Schloss tot."
+      );
       return;
     }
 
@@ -70,6 +89,61 @@ public class Commands {
   private static void handleEvent(String command, Player player) {
     if (command.equals("key_found")) {
       player.setKey(true);
+    }
+  }
+
+  private static void takeFuse(Player player) {
+    if (player.hasPowerRestored()) {
+      System.out.println("Die Sicherung steckt bereits im Sicherungskasten.");
+      return;
+    }
+
+    if (player.hasFuse()) {
+      System.out.println("Du hast die Sicherung bereits aufgenommen.");
+      return;
+    }
+
+    if (!player.getCurrentRoom().getName().equals("Flur")) {
+      System.out.println("Hier liegt keine Sicherung.");
+      return;
+    }
+
+    player.setFuse(true);
+    System.out.println("Du nimmst die Sicherung auf.");
+  }
+
+  private static void insertFuse(Player player) {
+    if (!player.getCurrentRoom().getName().equals("Flur")) {
+      System.out.println("Hier gibt es keinen offenen Sicherungskasten.");
+      return;
+    }
+
+    if (player.hasPowerRestored()) {
+      System.out.println("Der Notstrom ist bereits wiederhergestellt.");
+      return;
+    }
+
+    if (!player.hasFuse()) {
+      System.out.println("Dir fehlt die Sicherung.");
+      return;
+    }
+
+    player.setFuse(false);
+    player.setPowerRestored(true);
+    System.out.println("Du setzt die Sicherung ein. Der Notstrom ist wiederhergestellt.");
+  }
+
+  private static void printInventory(Player player) {
+    System.out.println("Inventar:");
+    if(player.hasFuse()) {
+      System.out.println("- Sicherung: ja");
+    } else {
+      System.out.println("- Sicherung: nein");
+    }
+    if(player.hasKey()) {
+      System.out.println("- Schlüssel: ja");
+    } else {
+      System.out.println("- Schlüssel: nein");
     }
   }
 }

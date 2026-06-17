@@ -67,6 +67,8 @@ public class CampusMap {
         + rooms.size()
         + " Räume | Schlüssel: "
         + (game.getPlayer().hasKey() ? "ja" : "nein")
+        + " Sicherung: "
+          + (game.getPlayer().hasFuse() ? "ja" : "nein")
     );
   }
 
