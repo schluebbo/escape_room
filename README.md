@@ -38,8 +38,3 @@ Voraussetzung:
 
 * Java installiert
 * IDE wie IntelliJ IDEA, Eclipse oder VS Code
-
-## Teamarbeit mit GitHub
-
-Das Projekt wird über GitHub verwaltet.
-Dadurch können mehrere Personen gemeinsam am Code arbeiten, Änderungen hochladen und den aktuellen Stand des Projekts teilen.
